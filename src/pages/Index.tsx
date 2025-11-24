@@ -2,7 +2,60 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
+
+interface PlayerStats {
+  name: string;
+  avatar: string;
+  kills: number;
+  deaths: number;
+  playTime: number;
+  description: string;
+}
+
+const playersData: Record<string, PlayerStats> = {
+  'EnDay01': {
+    name: 'EnDay01',
+    avatar: '👑',
+    kills: 59,
+    deaths: 17,
+    playTime: 23,
+    description: 'Стример и блогер по серверу MINEHAD любитель строить. Игрок харош в пвп и в пве. Очень быстро реализовывает проекты.'
+  },
+  'Kamelia07': {
+    name: 'Kamelia07',
+    avatar: '🌸',
+    kills: 1,
+    deaths: 31,
+    playTime: 9,
+    description: 'Очень любит животных! Лучше всех справляется в добыче животных. Не любит пвп, старается избегать его. Самый безопасный и дружелюбный игрок на сервере.'
+  },
+  'kfcasdw': {
+    name: 'kfcasdw',
+    avatar: '🍗',
+    kills: 4,
+    deaths: 3,
+    playTime: 6,
+    description: 'Куча идей которые ему не терпится реализовать! Быстрее всех справляется с начальными ресурсами. Хорошо строит и добывает нужные ему ресурсы.'
+  },
+  'paata1234': {
+    name: 'paata1234',
+    avatar: '🔥',
+    kills: 2,
+    deaths: 11,
+    playTime: 3,
+    description: 'Идей у него много но нет возможности их реализовать. Хорошо добывает ресурсы, но часто ленится.'
+  },
+  'BleW': {
+    name: 'BleW',
+    avatar: '💙',
+    kills: 18,
+    deaths: 7,
+    playTime: 10,
+    description: 'Игрок который пытается захватить весь сервер. Идей полно и потихоньку они реализовываются. Пытается убивать игроков, но чаще всего умирает он. Любитель тролить и издеваться над игроками. Построил 40 дверей в которых игрок запутывается и не замечает снизу блока который отсутствует и проваливаются в его трапку. Первый получил булаву на сервере.'
+  }
+};
 
 interface Player {
   rank: number;
@@ -12,30 +65,27 @@ interface Player {
 }
 
 const playersTimeData: Player[] = [
-  { rank: 1, name: 'EnDay01', value: 2847, avatar: '👑' },
-  { rank: 2, name: 'Kamelia07', value: 2156, avatar: '🌸' },
-  { rank: 3, name: 'kfcasdw', value: 1923, avatar: '🍗' },
-  { rank: 4, name: 'LaWWe04', value: 1654, avatar: '⚡' },
-  { rank: 5, name: 'BleW', value: 1432, avatar: '💙' },
-  { rank: 6, name: 'durmaLLin', value: 1287, avatar: '🎮' },
+  { rank: 1, name: 'EnDay01', value: 23, avatar: '👑' },
+  { rank: 2, name: 'BleW', value: 10, avatar: '💙' },
+  { rank: 3, name: 'Kamelia07', value: 9, avatar: '🌸' },
+  { rank: 4, name: 'kfcasdw', value: 6, avatar: '🍗' },
+  { rank: 5, name: 'paata1234', value: 3, avatar: '🔥' },
 ];
 
-const playersAchievementsData: Player[] = [
-  { rank: 1, name: 'kfcasdw', value: 156, avatar: '🍗' },
-  { rank: 2, name: 'EnDay01', value: 142, avatar: '👑' },
-  { rank: 3, name: 'durmaLLin', value: 128, avatar: '🎮' },
-  { rank: 4, name: 'Kamelia07', value: 115, avatar: '🌸' },
-  { rank: 5, name: 'BleW', value: 98, avatar: '💙' },
-  { rank: 6, name: 'LaWWe04', value: 87, avatar: '⚡' },
+const playersKillsData: Player[] = [
+  { rank: 1, name: 'EnDay01', value: 59, avatar: '👑' },
+  { rank: 2, name: 'BleW', value: 18, avatar: '💙' },
+  { rank: 3, name: 'kfcasdw', value: 4, avatar: '🍗' },
+  { rank: 4, name: 'paata1234', value: 2, avatar: '🔥' },
+  { rank: 5, name: 'Kamelia07', value: 1, avatar: '🌸' },
 ];
 
-const playersBlocksData: Player[] = [
-  { rank: 1, name: 'durmaLLin', value: 485632, avatar: '🎮' },
-  { rank: 2, name: 'LaWWe04', value: 387541, avatar: '⚡' },
-  { rank: 3, name: 'BleW', value: 298765, avatar: '💙' },
-  { rank: 4, name: 'EnDay01', value: 245321, avatar: '👑' },
-  { rank: 5, name: 'Kamelia07', value: 198432, avatar: '🌸' },
-  { rank: 6, name: 'kfcasdw', value: 156789, avatar: '🍗' },
+const playersDeathsData: Player[] = [
+  { rank: 1, name: 'Kamelia07', value: 31, avatar: '🌸' },
+  { rank: 2, name: 'EnDay01', value: 17, avatar: '👑' },
+  { rank: 3, name: 'paata1234', value: 11, avatar: '🔥' },
+  { rank: 4, name: 'BleW', value: 7, avatar: '💙' },
+  { rank: 5, name: 'kfcasdw', value: 3, avatar: '🍗' },
 ];
 
 const getMedalColor = (rank: number) => {
@@ -52,8 +102,9 @@ const getMedalIcon = (rank: number) => {
   return 'Circle';
 };
 
-const PlayerCard = ({ player, suffix }: { player: Player; suffix: string }) => (
+const PlayerCard = ({ player, suffix, onClick }: { player: Player; suffix: string; onClick: () => void }) => (
   <Card
+    onClick={onClick}
     className="p-6 minecraft-shadow hover:scale-105 transition-transform duration-200 cursor-pointer animate-fade-in bg-card/80 backdrop-blur-sm border-4 border-border"
     style={{ animationDelay: `${player.rank * 0.05}s` }}
   >
@@ -87,19 +138,26 @@ const PlayerCard = ({ player, suffix }: { player: Player; suffix: string }) => (
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('time');
+  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
 
   const getPlayerData = () => {
     switch (activeTab) {
-      case 'achievements':
-        return { players: playersAchievementsData, suffix: 'достижений' };
-      case 'blocks':
-        return { players: playersBlocksData, suffix: 'блоков' };
+      case 'kills':
+        return { players: playersKillsData, suffix: 'убийств' };
+      case 'deaths':
+        return { players: playersDeathsData, suffix: 'смертей' };
       default:
         return { players: playersTimeData, suffix: 'часов' };
     }
   };
 
   const { players, suffix } = getPlayerData();
+  const playerStats = selectedPlayer ? playersData[selectedPlayer] : null;
+
+  const getKDRatio = (stats: PlayerStats) => {
+    if (stats.deaths === 0) return stats.kills.toFixed(2);
+    return (stats.kills / stats.deaths).toFixed(2);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20 py-12 px-4">
@@ -125,41 +183,56 @@ const Index = () => {
               Время в игре
             </TabsTrigger>
             <TabsTrigger
-              value="achievements"
+              value="kills"
               className="text-lg font-bold py-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground minecraft-shadow transition-all"
             >
-              <Icon name="Star" size={20} className="mr-2" />
-              Достижения
+              <Icon name="Sword" size={20} className="mr-2" />
+              Убийства
             </TabsTrigger>
             <TabsTrigger
-              value="blocks"
+              value="deaths"
               className="text-lg font-bold py-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground minecraft-shadow transition-all"
             >
-              <Icon name="Box" size={20} className="mr-2" />
-              Добыто блоков
+              <Icon name="Skull" size={20} className="mr-2" />
+              Смерти
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="time" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               {players.map((player) => (
-                <PlayerCard key={player.rank} player={player} suffix={suffix} />
+                <PlayerCard 
+                  key={player.rank} 
+                  player={player} 
+                  suffix={suffix}
+                  onClick={() => setSelectedPlayer(player.name)}
+                />
               ))}
             </div>
           </TabsContent>
 
-          <TabsContent value="achievements" className="space-y-4">
+          <TabsContent value="kills" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               {players.map((player) => (
-                <PlayerCard key={player.rank} player={player} suffix={suffix} />
+                <PlayerCard 
+                  key={player.rank} 
+                  player={player} 
+                  suffix={suffix}
+                  onClick={() => setSelectedPlayer(player.name)}
+                />
               ))}
             </div>
           </TabsContent>
 
-          <TabsContent value="blocks" className="space-y-4">
+          <TabsContent value="deaths" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               {players.map((player) => (
-                <PlayerCard key={player.rank} player={player} suffix={suffix} />
+                <PlayerCard 
+                  key={player.rank} 
+                  player={player} 
+                  suffix={suffix}
+                  onClick={() => setSelectedPlayer(player.name)}
+                />
               ))}
             </div>
           </TabsContent>
@@ -172,14 +245,14 @@ const Index = () => {
                 <Icon name="Users" size={24} className="text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Всего игроков</p>
-                  <p className="text-2xl font-bold">6</p>
+                  <p className="text-2xl font-bold">5</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Icon name="Zap" size={24} className="text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Онлайн сейчас</p>
-                  <p className="text-2xl font-bold">4</p>
+                  <p className="text-2xl font-bold">3</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -193,6 +266,59 @@ const Index = () => {
           </Card>
         </div>
       </div>
+
+      <Dialog open={!!selectedPlayer} onOpenChange={() => setSelectedPlayer(null)}>
+        <DialogContent className="minecraft-shadow border-4 border-primary max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3 text-3xl">
+              <span className="text-5xl">{playerStats?.avatar}</span>
+              <span className="text-primary">{playerStats?.name}</span>
+            </DialogTitle>
+          </DialogHeader>
+          
+          {playerStats && (
+            <div className="space-y-6">
+              <div className="p-4 bg-secondary/30 border-2 border-border">
+                <p className="text-foreground/90 leading-relaxed">{playerStats.description}</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <Card className="p-4 border-2 border-border">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon name="Sword" size={20} className="text-destructive" />
+                    <span className="text-sm text-muted-foreground font-semibold">Убийства</span>
+                  </div>
+                  <p className="text-3xl font-bold text-destructive">{playerStats.kills}</p>
+                </Card>
+
+                <Card className="p-4 border-2 border-border">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon name="Skull" size={20} className="text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground font-semibold">Смерти</span>
+                  </div>
+                  <p className="text-3xl font-bold">{playerStats.deaths}</p>
+                </Card>
+
+                <Card className="p-4 border-2 border-border">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon name="Clock" size={20} className="text-primary" />
+                    <span className="text-sm text-muted-foreground font-semibold">Время игры</span>
+                  </div>
+                  <p className="text-3xl font-bold text-primary">{playerStats.playTime}ч</p>
+                </Card>
+
+                <Card className="p-4 border-2 border-border">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon name="Target" size={20} className="text-gold" />
+                    <span className="text-sm text-muted-foreground font-semibold">K/D Ratio</span>
+                  </div>
+                  <p className="text-3xl font-bold text-gold">{getKDRatio(playerStats)}</p>
+                </Card>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
