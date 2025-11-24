@@ -12,36 +12,30 @@ interface Player {
 }
 
 const playersTimeData: Player[] = [
-  { rank: 1, name: 'SteveTheMiner', value: 2847, avatar: '⛏️' },
-  { rank: 2, name: 'Creeper_Hunter', value: 2156, avatar: '💣' },
-  { rank: 3, name: 'DiamondKing', value: 1923, avatar: '💎' },
-  { rank: 4, name: 'EnderWarrior', value: 1654, avatar: '👾' },
-  { rank: 5, name: 'RedstoneGenius', value: 1432, avatar: '🔴' },
-  { rank: 6, name: 'BuildMaster', value: 1287, avatar: '🏗️' },
-  { rank: 7, name: 'PvPChampion', value: 1145, avatar: '⚔️' },
-  { rank: 8, name: 'FarmLord', value: 987, avatar: '🌾' },
+  { rank: 1, name: 'EnDay01', value: 2847, avatar: '👑' },
+  { rank: 2, name: 'Kamelia07', value: 2156, avatar: '🌸' },
+  { rank: 3, name: 'kfcasdw', value: 1923, avatar: '🍗' },
+  { rank: 4, name: 'LaWWe04', value: 1654, avatar: '⚡' },
+  { rank: 5, name: 'BleW', value: 1432, avatar: '💙' },
+  { rank: 6, name: 'durmaLLin', value: 1287, avatar: '🎮' },
 ];
 
 const playersAchievementsData: Player[] = [
-  { rank: 1, name: 'DiamondKing', value: 156, avatar: '💎' },
-  { rank: 2, name: 'SteveTheMiner', value: 142, avatar: '⛏️' },
-  { rank: 3, name: 'EnderWarrior', value: 128, avatar: '👾' },
-  { rank: 4, name: 'Creeper_Hunter', value: 115, avatar: '💣' },
-  { rank: 5, name: 'RedstoneGenius', value: 98, avatar: '🔴' },
-  { rank: 6, name: 'BuildMaster', value: 87, avatar: '🏗️' },
-  { rank: 7, name: 'PvPChampion', value: 76, avatar: '⚔️' },
-  { rank: 8, name: 'FarmLord', value: 65, avatar: '🌾' },
+  { rank: 1, name: 'kfcasdw', value: 156, avatar: '🍗' },
+  { rank: 2, name: 'EnDay01', value: 142, avatar: '👑' },
+  { rank: 3, name: 'durmaLLin', value: 128, avatar: '🎮' },
+  { rank: 4, name: 'Kamelia07', value: 115, avatar: '🌸' },
+  { rank: 5, name: 'BleW', value: 98, avatar: '💙' },
+  { rank: 6, name: 'LaWWe04', value: 87, avatar: '⚡' },
 ];
 
 const playersBlocksData: Player[] = [
-  { rank: 1, name: 'BuildMaster', value: 485632, avatar: '🏗️' },
-  { rank: 2, name: 'SteveTheMiner', value: 387541, avatar: '⛏️' },
-  { rank: 3, name: 'DiamondKing', value: 298765, avatar: '💎' },
-  { rank: 4, name: 'FarmLord', value: 245321, avatar: '🌾' },
-  { rank: 5, name: 'RedstoneGenius', value: 198432, avatar: '🔴' },
-  { rank: 6, name: 'EnderWarrior', value: 156789, avatar: '👾' },
-  { rank: 7, name: 'Creeper_Hunter', value: 134567, avatar: '💣' },
-  { rank: 8, name: 'PvPChampion', value: 98765, avatar: '⚔️' },
+  { rank: 1, name: 'durmaLLin', value: 485632, avatar: '🎮' },
+  { rank: 2, name: 'LaWWe04', value: 387541, avatar: '⚡' },
+  { rank: 3, name: 'BleW', value: 298765, avatar: '💙' },
+  { rank: 4, name: 'EnDay01', value: 245321, avatar: '👑' },
+  { rank: 5, name: 'Kamelia07', value: 198432, avatar: '🌸' },
+  { rank: 6, name: 'kfcasdw', value: 156789, avatar: '🍗' },
 ];
 
 const getMedalColor = (rank: number) => {
@@ -178,14 +172,14 @@ const Index = () => {
                 <Icon name="Users" size={24} className="text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Всего игроков</p>
-                  <p className="text-2xl font-bold">1,234</p>
+                  <p className="text-2xl font-bold">6</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Icon name="Zap" size={24} className="text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Онлайн сейчас</p>
-                  <p className="text-2xl font-bold">87</p>
+                  <p className="text-2xl font-bold">4</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
